@@ -4,19 +4,28 @@ public class Singleton {
 	
 
 	    private static volatile Singleton instance;
-		private int i = 1;
+		private static  int i = 0;
+		private int j = 0;
 	    
 	    private Singleton(){
-	    	System.out.println("The Instance is created " + i++  );
+	    	j = ++i;
+	    	System.out.println("The Instance is created " + i  );
 	    }
 	    
 	    public static Singleton getInstance(){
 	        if(instance == null){
 	        	synchronized(Singleton.class) {
-	        		instance = new Singleton();
+	        		if(instance == null)
+	        			instance = new Singleton();
 	        	}
 	        }
 	        return instance;
+	        
+	    }
+	    @Override
+	    public String toString() {
+			return "inst-" + j;
+	    	
 	    }
 	    
 
